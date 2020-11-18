@@ -30,7 +30,6 @@ public class Movement : MonoBehaviour
         rigidBody = gameObject.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         ReadInput();

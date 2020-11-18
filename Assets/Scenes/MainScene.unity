@@ -15754,20 +15754,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7395103939583132854, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
   m_PrefabInstance: {fileID: 7665625795344034826}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &1785151032
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1785151031}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &1792161779
 GameObject:
   m_ObjectHideFlags: 0
@@ -18518,14 +18504,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1785151032, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1785151032, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
-      propertyPath: m_Center.z
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 1785151033, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
       propertyPath: cam
       value: 
@@ -18578,7 +18556,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8699825684283519467, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
+      propertyPath: m_Radius
+      value: 0.42
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1785151032, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
 --- !u!1001 &8228982949848529026
 PrefabInstance:

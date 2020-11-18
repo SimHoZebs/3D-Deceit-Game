@@ -16,8 +16,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &1785151032
-BoxCollider:
+--- !u!136 &8699825684283519467
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -25,10 +25,11 @@ BoxCollider:
   m_GameObject: {fileID: 7395103939583132854}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.55, y: 1.8, z: 0.42}
-  m_Center: {x: 0, y: 0.9, z: 0.05}
+  m_Enabled: 1
+  m_Radius: 0.42
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!95 &1092300143
 Animator:
   serializedVersion: 3
@@ -77,20 +78,18 @@ MonoBehaviour:
   runMaxSpeed: 4
   walkMaxSpeed: 2
   cam: {fileID: 0}
---- !u!136 &8699825684283519467
-CapsuleCollider:
+--- !u!114 &4843138061413251051
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7395103939583132854}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67b9a77b1b9d394893382a308dd127d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7665625794663479783
 PrefabInstance:
   m_ObjectHideFlags: 0
