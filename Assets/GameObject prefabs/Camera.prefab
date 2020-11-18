@@ -96,11 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d3ff2c9680faf40acd6d52b649d2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  cameraOffset:
-    x: 0
-    y: 1.6
-    z: 0
+  attachTarget: {fileID: 0}
+  camOffSet: {x: 0, y: 1.6, z: 0}
   camSensitivity: 2
-  yaw: 0
-  pitch: 0
+  xAxis: 0
+  yAxis: 0
