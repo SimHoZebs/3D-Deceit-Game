@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class InteractionControls : MonoBehaviour
 {
-    public bool pressedE;
-    private Interactable interactable;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    private bool pressedE;
 
-
-    private void ReadInput(){
+    private void ReadInteractionInput(){
         pressedE = Input.GetKeyDown(KeyCode.E);
     }
 
-    private void Interact(string interactedObj){
-        ReadInput();
+    private void OnTriggerEnter(Collider other) {
+        ReadInteractionInput();
         if (pressedE){
-            Debug.Log("Interacted with " + interactedObj);
+            other.SendMessage("InteractResponse");
         }
     }
 }

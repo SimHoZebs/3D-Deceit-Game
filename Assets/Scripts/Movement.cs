@@ -21,18 +21,18 @@ public class Movement : MonoBehaviour
     //object instancing
     [SerializeField] private GameObject cam;
     private Animator animator;
-    private Rigidbody rigidBody;
+    private CharacterController rigidBody;
 
     void Start()
     {
         //caching gameObjs
         animator = gameObject.GetComponent<Animator>();
-        rigidBody = gameObject.GetComponent<Rigidbody>();
+        rigidBody = gameObject.GetComponent<CharacterController>();
     }
 
     void FixedUpdate()
     {
-        ReadInput();
+        ReadMovementInput();
 
         float currentAccel = heldShift? runAccel : walkAccel;
 
@@ -59,14 +59,15 @@ public class Movement : MonoBehaviour
         }
 
         //Normalize vector size and multiply to target accel for constant vel
-        rigidBody.velocity = Vector3.Normalize(targetVel) * currentAccel;
+        rigidBody.SimpleMove(Vector3.Normalize(targetVel) * currentAccel);
     }
 
-    private void ReadInput(){
+    private void ReadMovementInput(){
         heldW = Input.GetKey(KeyCode.W);
         heldS = Input.GetKey(KeyCode.S);
         heldD = Input.GetKey(KeyCode.D);
         heldA = Input.GetKey(KeyCode.A);
         heldShift = Input.GetKey(KeyCode.LeftShift);
     }
+
 }
