@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public bool canInteract = false;
-    public string nama;
     private void OnTriggerStay(Collider other) {
-        name = other.name;
-        other.BroadcastMessage("Interact");
+        other.BroadcastMessage("Interact", gameObject.name);
     }
 }

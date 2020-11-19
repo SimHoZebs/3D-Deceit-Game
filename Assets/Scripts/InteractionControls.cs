@@ -16,10 +16,10 @@ public class InteractionControls : MonoBehaviour
         pressedE = Input.GetKeyDown(KeyCode.E);
     }
 
-    private void Interact(){
+    private void Interact(string interactedObj){
         ReadInput();
         if (pressedE){
-            Debug.Log("Interacted");
+            Debug.Log("Interacted with " + interactedObj);
         }
     }
 }
