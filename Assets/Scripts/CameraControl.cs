@@ -10,8 +10,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private float camSensitivity = 2.0f;
 
     //Visualization purpose
-    [SerializeField] private float xAxis = 0.0f;
-    [SerializeField] private float yAxis = 0.0f;
+    [SerializeField] private float xAxis, yAxis = 0.0f;
 
     // Update is called once per frame
     void Update()

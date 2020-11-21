@@ -5,21 +5,21 @@ using UnityEngine;
 public class MedbayScanCollider: MonoBehaviour
 {
     // Start is called before the first frame update
-    private float taskStartTime;
     [SerializeField] private float taskDuration = 10f;
-
-    public bool attemptedInteract = false;
+    [SerializeField] private float onTaskDuration;
+    [SerializeField] private bool showTaskDuration;
+    private float taskStartTime;
     private bool taskComplete = false;
 
     private void OnTriggerEnter(Collider other) {
         taskStartTime = Time.time;
-        Debug.Log(taskStartTime);
+        Debug.Log("Starting task...");
     }
 
     private void OnTriggerStay(Collider other) {
-        var onTaskDuration = Time.time - taskStartTime; 
+        onTaskDuration = Time.time - taskStartTime; 
 
-        if (!taskComplete){
+        if (showTaskDuration && !taskComplete){
             Debug.Log("onTaskDuration " + onTaskDuration);
         }
 
@@ -29,10 +29,9 @@ public class MedbayScanCollider: MonoBehaviour
             taskComplete = true;
             Debug.Log("Task complete");
         }
-
     }
+
     public void InteractResponse(){
         Debug.Log("interacted with " + gameObject.name);
     }
-
 }

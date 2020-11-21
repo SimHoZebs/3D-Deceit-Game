@@ -6,17 +6,10 @@ public class Movement : MonoBehaviour
 {
 
     //Speed Control
-    [SerializeField] float walkAccel;
-    [SerializeField] float runAccel;
-    [SerializeField] float runMaxSpeed;
-    [SerializeField] float walkMaxSpeed;
+    [SerializeField] float walkAccel, runAccel, runMaxSpeed, walkMaxSpeed;
 
     //Read Input
-    private bool heldW;
-    private bool heldS;
-    private bool heldD;
-    private bool heldA;
-    private bool heldShift;
+    private bool heldW, heldS, heldD, heldA, heldShift;
 
     //object instancing
     [SerializeField] private GameObject cam;
