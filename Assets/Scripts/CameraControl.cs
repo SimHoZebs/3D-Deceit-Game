@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    [SerializeField] private string defaultCamMode = "HeadFollowMode";
     //customization
     [SerializeField] private GameObject attachTarget;
     [SerializeField] private Vector3 camOffset = new Vector3(0f, 1.6f, 0f);
@@ -12,12 +11,8 @@ public class CameraControl : MonoBehaviour
 
     //Visualization purpose
     [SerializeField] private float xAxis, yAxis = 0.0f;
+    private string currentCamMode;
 
-    [SerializeField] private string currentCamMode, prevCamMode;
-
-    private void Start() {
-        prevCamMode = currentCamMode = defaultCamMode;
-    }
     private void Update(){
 
         ChangeCamMode();
@@ -43,11 +38,8 @@ public class CameraControl : MonoBehaviour
             currentCamMode = "InteractionMode";
         }
         else{
-            currentCamMode = defaultCamMode;
+            currentCamMode = "HeadFollowMode";
         }
-
-        //track previous camera mode
-        prevCamMode = currentCamMode;
     }
 
     public void HeadFollowMode(){

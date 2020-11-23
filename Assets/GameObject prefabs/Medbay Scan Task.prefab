@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 923286345}
   - component: {fileID: 923286344}
   m_Layer: 0
-  m_Name: Scan Collider
+  m_Name: Medbay Scan Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46a8e5292e1b324f9a1036c610d6fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskDuration: 10
-  onTaskDuration: 0
-  showTaskDuration: 0
 --- !u!65 &923286345
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59,7 +56,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.25, y: 1, z: 0.25}
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!54 &923286344
 Rigidbody:
@@ -90,6 +87,7 @@ GameObject:
   - component: {fileID: 1394418844385601249}
   - component: {fileID: 1394418844385601262}
   - component: {fileID: 1790110216}
+  - component: {fileID: 629533515}
   m_Layer: 0
   m_Name: Medbay Scan Task
   m_TagString: Untagged
@@ -391,6 +389,20 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &629533515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394418844385601261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0776d4a782879844b021092e835390b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskDuration: 10
+  onTaskDuration: 0
 --- !u!1 &4863781868941875594
 GameObject:
   m_ObjectHideFlags: 0
