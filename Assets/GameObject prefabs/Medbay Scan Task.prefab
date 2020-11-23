@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 629533515}
   m_Layer: 0
   m_Name: Medbay Scan Task
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

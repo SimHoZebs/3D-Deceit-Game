@@ -4590,6 +4590,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wire Task
       objectReference: {fileID: 0}
+    - target: {fileID: 1394418844385601261, guid: b3d04e1b24a7c254ab66012110ee6b75, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3d04e1b24a7c254ab66012110ee6b75, type: 3}
 --- !u!1001 &419158999

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class InteractionHandler : MonoBehaviour
 {
-    [SerializeField] Camera cam;
+    [SerializeField] private Camera cam;
+    [SerializeField] private float interactRange = 3f;
 
     //event system for all task interactions
     public event Action<string> taskInteractions;
@@ -31,9 +32,9 @@ public class InteractionHandler : MonoBehaviour
 
         //Physics.Raycast uses the data stored in ray and casts a ray
         //Physics.Raycast returns a bool for if it hit an object
-        //outputs any information for type RaycastHit to to hit
+        //assigns value Vector3 direction to hit
         RaycastHit hit;
-        string selectedObjTag = Physics.Raycast(ray, out hit)? hit.transform.tag:null;
+        string selectedObjTag = Physics.Raycast(ray, out hit, interactRange)? hit.transform.tag:null;
 
         return selectedObjTag == "Interactable"? hit.transform.name : null;
     }
