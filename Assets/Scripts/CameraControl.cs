@@ -34,7 +34,7 @@ public class CameraControl : MonoBehaviour
     private void ChangeCamMode(){
 
         // T is the default key to change camMode. It must be held.
-        if (Input.GetKey(KeyCode.T)){
+        if (Input.GetKey(KeyCode.E)){
             currentCamMode = "InteractionMode";
         }
         else{

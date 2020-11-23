@@ -4,5 +4,16 @@ using UnityEngine;
 
 public class WireTask : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private string objName;
+
+    private void Start() {
+        objName = gameObject.name;
+        InteractionHandler._this.taskInteractions += WireTaskStart;
+    }
+
+    private void WireTaskStart(string taskName){
+        if (taskName == objName){
+            Debug.Log("Successfully doing this");
+        }
+    }
 }
