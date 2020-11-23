@@ -9,8 +9,11 @@ public class InteractionHandler : MonoBehaviour
     [SerializeField] private float interactRange = 3f;
 
     //event system for all task interactions
-    public event Action<string> taskInteractions;
+    public event Action<GameObject> taskInteractions;
     public static InteractionHandler _this;
+
+    //public var
+    private GameObject interactableObj;
 
     private void Awake() {
         _this = this;
@@ -18,14 +21,17 @@ public class InteractionHandler : MonoBehaviour
 
     private void Update() {
 
-        var interactableObj = TargetedInteractableObj();
-
-        if (Input.GetKeyDown(KeyCode.E) && interactableObj != null){
+        if (InputHandler._this.isInteracting){
+            interactableObj = TargetedInteractableObj();
             InteractionHandler._this.TaskInteract(interactableObj);
         }
+        if (InputHandler._this.hasInterrupted){
+            InterruptTask();
+        }
+        
     }
 
-    private string TargetedInteractableObj(){
+    private GameObject TargetedInteractableObj(){
 
         //ray stores information about a ray, such as its starting position 
         var ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -34,13 +40,20 @@ public class InteractionHandler : MonoBehaviour
         //Physics.Raycast returns a bool for if it hit an object
         //assigns value Vector3 direction to hit
         RaycastHit hit;
-        string selectedObjTag = Physics.Raycast(ray, out hit, interactRange)? hit.transform.tag:null;
 
-        return selectedObjTag == "Interactable"? hit.transform.name : null;
+        bool rayHit = Physics.Raycast(ray, out hit, interactRange);
+
+        return rayHit && hit.transform.CompareTag("Interactable")? hit.transform.gameObject : null;
     }
 
-    public void TaskInteract(string task){
-        Debug.Log("Doing " + task);
+    public void TaskInteract(GameObject task){
+        if (task != null){
+            Debug.Log("Player has interacted with " + task.name);
+        }
         taskInteractions?.Invoke(task);
+    }
+
+    private void InterruptTask(){
+        CameraControl._this.ChangeCamMode(null);
     }
 }

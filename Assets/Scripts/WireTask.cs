@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class WireTask : MonoBehaviour
 {
-    private string objName;
 
     private void Start() {
-        objName = gameObject.name;
         InteractionHandler._this.taskInteractions += WireTaskStart;
     }
 
-    private void WireTaskStart(string taskName){
-        if (taskName == objName){
-            Debug.Log("Successfully doing this");
+    private void WireTaskStart(GameObject task){
+        if (task == gameObject){
+            Debug.Log(gameObject.name + "detects player interaction");
         }
     }
 }

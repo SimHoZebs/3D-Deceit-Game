@@ -4,48 +4,57 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    //customization
+    [Header("Head-Follow Mode")]
+    [SerializeField] public int headFollowModeId = 0;
     [SerializeField] private GameObject attachTarget;
-    [SerializeField] private Vector3 camOffset = new Vector3(0f, 1.6f, 0f);
+    [SerializeField] private Vector3 headFollowModeCamOffset = new Vector3(0f, 1.6f, 0f);
     [SerializeField] private float camSensitivity = 2.0f;
 
+    [Header("Interaction Mode")]
+    [SerializeField] public int interactionModeId = 1;
+    [SerializeField] private GameObject focusObj;
+    [SerializeField] private Vector3 interactionModeCamOffset = new Vector3(0f, 0f, -3f);
+    //interact with public variables
+    public static CameraControl _this;
+
     //Visualization purpose
+    [Header("Debugging data")]
     [SerializeField] private float xAxis, yAxis = 0.0f;
-    private string currentCamMode;
+    private int currentCamMode;
+
+    private void Start() {
+        _this = this;
+        InteractionHandler._this.taskInteractions += ChangeCamMode;
+    }
 
     private void Update(){
 
-        ChangeCamMode();
-
-        switch (currentCamMode)
-        {
-            default:
-                HeadFollowMode();
-                break;
-            case "HeadFollowMode":
-                HeadFollowMode();
-                break;
-            case "InteractionMode":
-                InteractionMode();
-                break;
+        if (currentCamMode == headFollowModeId){
+            HeadFollowMode();
+        }
+        else if(currentCamMode == interactionModeId){
+            InteractionMode(focusObj);
         }
     }
 
-    private void ChangeCamMode(){
+    public void ChangeCamMode(GameObject task){
 
-        // T is the default key to change camMode. It must be held.
-        if (Input.GetKey(KeyCode.E)){
-            currentCamMode = "InteractionMode";
+        if (task == null){
+            Debug.Log("Normal Mode");
+            currentCamMode = headFollowModeId;
+            focusObj = null;
         }
         else{
-            currentCamMode = "HeadFollowMode";
+            Debug.Log("Interaction Mode");
+            currentCamMode = interactionModeId;
+            focusObj = task;
         }
     }
 
     public void HeadFollowMode(){
 
         //Have same position as the attachTarget with an offset
-        transform.position = attachTarget.transform.position + camOffset;
+        transform.position = attachTarget.transform.position + headFollowModeCamOffset;
 
         //get mouse coords
         xAxis += camSensitivity * Input.GetAxis("Mouse X");
@@ -58,7 +67,7 @@ public class CameraControl : MonoBehaviour
         //Thanks StackOverflow
     }
 
-    public void InteractionMode(){
-
+    public void InteractionMode(GameObject task){
+        transform.position = task.transform.position + interactionModeCamOffset;
     }
 }
