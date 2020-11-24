@@ -10,6 +10,7 @@ public class InteractionHandler : MonoBehaviour
 
     //event system for all task interactions
     public event Action<GameObject> taskInteractions;
+    public event Action<GameObject> taskInterruptions;
     public static InteractionHandler _this;
 
     //public var
@@ -26,7 +27,7 @@ public class InteractionHandler : MonoBehaviour
             InteractionHandler._this.TaskInteract(interactableObj);
         }
         if (InputHandler._this.hasInterrupted){
-            InterruptTask();
+            _this.TaskInterrupt(interactableObj);
         }
         
     }
@@ -46,14 +47,21 @@ public class InteractionHandler : MonoBehaviour
         return rayHit && hit.transform.CompareTag("Interactable")? hit.transform.gameObject : null;
     }
 
-    public void TaskInteract(GameObject task){
+    private void TaskInteract(GameObject task){
         if (task != null){
             Debug.Log("Player has interacted with " + task.name);
         }
         taskInteractions?.Invoke(task);
     }
 
-    private void InterruptTask(){
+    private void TaskInterrupt(GameObject task){
+        if (interactableObj != null){
+            taskInterruptions?.Invoke(task);
+            CameraControl._this.ChangeCamMode(null);
+        }
+    }
+
+    public void TaskComplete(){
         CameraControl._this.ChangeCamMode(null);
     }
 }

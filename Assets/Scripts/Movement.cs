@@ -8,9 +8,6 @@ public class Movement : MonoBehaviour
     //Speed Control
     [SerializeField] float walkAccel, runAccel, runMaxSpeed, walkMaxSpeed;
 
-    //Read Input
-    private bool heldW, heldS, heldD, heldA, heldShift;
-
     //object instancing
     [SerializeField] private GameObject cam;
     private Animator animator;
@@ -25,9 +22,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        ReadMovementInput();
 
-        float currentAccel = heldShift? runAccel : walkAccel;
 
         //get cam's Vector3 converted from local Z & X axis to global.
         var side = cam.transform.right;
@@ -38,29 +33,23 @@ public class Movement : MonoBehaviour
         //Basic WASD movement using vector arithmetic
         var targetVel = new Vector3(0,0,0);
 
-        if (heldW){
+        if (InputHandler._this.isMovingUp){
             targetVel += forward;
         }
-        if (heldS){
+        if (InputHandler._this.isMovingDown){
             targetVel -= forward;
         }
-        if (heldD){
+        if (InputHandler._this.isMovingRight){
             targetVel += side;
         }
-        if (heldA){
+        if (InputHandler._this.isMovingLeft){
             targetVel -= side;
         }
 
+        //account for sprinting
+        float currentAccel = InputHandler._this.isSprinting? runAccel : walkAccel;
         //Normalize vector size and multiply to target accel for constant vel
         rigidBody.SimpleMove(Vector3.Normalize(targetVel) * currentAccel);
-    }
-
-    private void ReadMovementInput(){
-        heldW = Input.GetKey(KeyCode.W);
-        heldS = Input.GetKey(KeyCode.S);
-        heldD = Input.GetKey(KeyCode.D);
-        heldA = Input.GetKey(KeyCode.A);
-        heldShift = Input.GetKey(KeyCode.LeftShift);
     }
 
 }

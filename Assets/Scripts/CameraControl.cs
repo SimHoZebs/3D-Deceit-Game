@@ -24,7 +24,6 @@ public class CameraControl : MonoBehaviour
 
     private void Start() {
         _this = this;
-        InteractionHandler._this.taskInteractions += ChangeCamMode;
     }
 
     private void Update(){

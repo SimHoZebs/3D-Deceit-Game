@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 474760114}
   - component: {fileID: 474760115}
+  - component: {fileID: 2743993681196239871}
   m_Layer: 8
-  m_Name: Interaction Handler
+  m_Name: Handler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +45,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 7665625794601266815}
+  interactRange: 3000
+--- !u!114 &2743993681196239871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474760113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1947995b9190e0346a35ac2ceadc9494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveUp: 119
+  moveDown: 115
+  moveLeft: 97
+  moveRight: 100
+  sprint: 304
+  interact: 101
+  interrupt: 116
+  isMovingUp: 0
+  isMovingDown: 0
+  isMovingLeft: 0
+  isMovingRight: 0
+  isSprinting: 0
+  isInteracting: 0
+  hasInterrupted: 0
 --- !u!54 &1785151036
 Rigidbody:
   m_ObjectHideFlags: 0
