@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MedbayScanCollider: MonoBehaviour
+public class MedbayScannerTaskCollider: MonoBehaviour
 {
     private void OnTriggerEnter(Collider other) {
-        MedbaySanner._this.OnMedBayEnter();
+        MedbaySannerTask._this.OnMedBayEnter();
     }
 
     private void OnTriggerStay(Collider other) {
-        MedbaySanner._this.OnMedBayStay();
+        MedbaySannerTask._this.OnMedBayStay();
     }
 
 }

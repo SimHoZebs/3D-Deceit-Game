@@ -164,9 +164,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Upload
-
-    Download
+  m_text: 'Download
 
     Task'
   m_isRightToLeft: 0
@@ -249,9 +247,9 @@ GameObject:
   - component: {fileID: 4289854987720014031}
   - component: {fileID: 4289854987720014024}
   - component: {fileID: 4289854987720014025}
-  - component: {fileID: 8000281834727806514}
+  - component: {fileID: 1699445326937331340}
   m_Layer: 0
-  m_Name: Upload_Download Task
+  m_Name: Download Task
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,7 +332,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8000281834727806514
+--- !u!114 &1699445326937331340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,6 +341,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4289854987720014026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51de6de3d748165468ffbe4d1ca5d43f, type: 3}
+  m_Script: {fileID: 11500000, guid: d5bc449abdb57504283274244205399b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskOnGoing: 0
+  isInteractionModeTask: 0
+  interactingPlayerCameraControl: {fileID: 0}
+  interactingPlayer: {fileID: 0}
+  interactingPlayerTaskHandler: {fileID: 0}
+  thisTaskObj: {fileID: 0}
+  thisTaskName: 
+  taskDuration: 8.5
+  onTaskDuration: 0

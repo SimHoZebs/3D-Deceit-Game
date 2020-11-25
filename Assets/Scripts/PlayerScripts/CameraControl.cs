@@ -5,26 +5,21 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     [Header("Head-Follow Mode")]
-    [SerializeField] public int headFollowModeId = 0;
-    [SerializeField] private GameObject attachTarget;
+    [SerializeField] private int headFollowModeId = 0;
     [SerializeField] private Vector3 headFollowModeCamOffset = new Vector3(0f, 1.6f, 0f);
     [SerializeField] private float camSensitivity = 2.0f;
+    [SerializeField] private Transform attachTargetTransform;
 
     [Header("Interaction Mode")]
-    [SerializeField] public int interactionModeId = 1;
+    [SerializeField] private int interactionModeId = 1;
     [SerializeField] private GameObject focusObj;
-    [SerializeField] private Vector3 interactionModeCamOffset = new Vector3(0f, 0f, -3f);
+    [SerializeField] private Vector3 interactionModeCamOffset = new Vector3(0f, 0f, -2f);
     //interact with public variables
-    public static CameraControl _this;
 
     //Visualization purpose
     [Header("Debugging data")]
     [SerializeField] private float xAxis, yAxis = 0.0f;
     private int currentCamMode;
-
-    private void Start() {
-        _this = this;
-    }
 
     private void Update(){
 
@@ -50,10 +45,10 @@ public class CameraControl : MonoBehaviour
         }
     }
 
-    public void HeadFollowMode(){
+    private void HeadFollowMode(){
 
         //Have same position as the attachTarget with an offset
-        transform.position = attachTarget.transform.position + headFollowModeCamOffset;
+        transform.position = attachTargetTransform.position + headFollowModeCamOffset;
 
         //get mouse coords
         xAxis += camSensitivity * Input.GetAxis("Mouse X");
@@ -66,7 +61,7 @@ public class CameraControl : MonoBehaviour
         //Thanks StackOverflow
     }
 
-    public void InteractionMode(GameObject task){
-        transform.position = task.transform.position + interactionModeCamOffset;
+    private void InteractionMode(GameObject taskObj){
+        transform.position = taskObj.transform.position + interactionModeCamOffset;
     }
 }

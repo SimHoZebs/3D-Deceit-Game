@@ -15,14 +15,11 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private KeyCode interact = KeyCode.E;
     [SerializeField] private KeyCode interrupt = KeyCode.T;
 
-    public static InputHandler _this ;
-
     public bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight, isSprinting;
     public bool isInteracting, hasInterrupted;
     // Start is called before the first frame update
     void Start()
     {
-        _this = this;
     }
 
     // Update is called once per frame

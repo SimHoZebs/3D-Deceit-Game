@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class MovementControl : MonoBehaviour
 {
 
     //Speed Control
@@ -12,12 +12,14 @@ public class Movement : MonoBehaviour
     [SerializeField] private GameObject cam;
     private Animator animator;
     private CharacterController rigidBody;
+    private InputHandler inputHandler;
 
     void Start()
     {
         //caching gameObjs
         animator = gameObject.GetComponent<Animator>();
         rigidBody = gameObject.GetComponent<CharacterController>();
+        inputHandler = gameObject.GetComponentInChildren<InputHandler>();
     }
 
     void FixedUpdate()
@@ -33,21 +35,21 @@ public class Movement : MonoBehaviour
         //Basic WASD movement using vector arithmetic
         var targetVel = new Vector3(0,0,0);
 
-        if (InputHandler._this.isMovingUp){
+        if (inputHandler.isMovingUp){
             targetVel += forward;
         }
-        if (InputHandler._this.isMovingDown){
+        if (inputHandler.isMovingDown){
             targetVel -= forward;
         }
-        if (InputHandler._this.isMovingRight){
+        if (inputHandler.isMovingRight){
             targetVel += side;
         }
-        if (InputHandler._this.isMovingLeft){
+        if (inputHandler.isMovingLeft){
             targetVel -= side;
         }
 
         //account for sprinting
-        float currentAccel = InputHandler._this.isSprinting? runAccel : walkAccel;
+        float currentAccel = inputHandler.isSprinting? runAccel : walkAccel;
         //Normalize vector size and multiply to target accel for constant vel
         rigidBody.SimpleMove(Vector3.Normalize(targetVel) * currentAccel);
     }

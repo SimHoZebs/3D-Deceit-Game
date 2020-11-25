@@ -5,34 +5,35 @@ using UnityEngine;
 
 public class InteractionHandler : MonoBehaviour
 {
+    /*
     [SerializeField] private Camera cam;
     [SerializeField] private float interactRange = 3f;
 
     //event system for all task interactions
-    public event Action<GameObject> taskInteractions;
-    public event Action<GameObject> taskInterruptions;
-    public static InteractionHandler _this;
+    private InputHandler inputHandler;
+    private playerTaskHandler playerTaskHandler;
 
     //public var
-    private GameObject interactableObj;
+    private GameObject targetObj;
 
     private void Awake() {
-        _this = this;
+        inputHandler = gameObject.GetComponent<InputHandler>();
+        playerTaskHandler = gameObject.GetComponent<playerTaskHandler>();
     }
 
     private void Update() {
 
-        if (InputHandler._this.isInteracting){
-            interactableObj = TargetedInteractableObj();
-            InteractionHandler._this.TaskInteract(interactableObj);
+        if (inputHandler.isInteracting){
+            targetObj = TargetedObj();
+            PlayerInteract(targetObj);
         }
-        if (InputHandler._this.hasInterrupted){
-            _this.TaskInterrupt(interactableObj);
+        if (inputHandler.hasInterrupted){
+            PlayerInterrupt(targetObj);
         }
         
     }
 
-    private GameObject TargetedInteractableObj(){
+    private GameObject TargetedObj(){
 
         //ray stores information about a ray, such as its starting position 
         var ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -47,21 +48,17 @@ public class InteractionHandler : MonoBehaviour
         return rayHit && hit.transform.CompareTag("Interactable")? hit.transform.gameObject : null;
     }
 
-    private void TaskInteract(GameObject task){
-        if (task != null){
+    private void PlayerInteract(GameObject task, GameObject player){
+        if (task != null && playerTaskHandler.assignedTaskStatus.ContainsKey(task)){
             Debug.Log("Player has interacted with " + task.name);
-        }
-        taskInteractions?.Invoke(task);
-    }
-
-    private void TaskInterrupt(GameObject task){
-        if (interactableObj != null){
-            taskInterruptions?.Invoke(task);
-            CameraControl._this.ChangeCamMode(null);
+            playerTaskHandler.taskInteractions?.Invoke(task, gameObject);
         }
     }
 
-    public void TaskComplete(){
-        CameraControl._this.ChangeCamMode(null);
+    private void PlayerInterrupt(GameObject task, GameObject player){
+        if (targetObj != null && playerTaskHandler.assignedTaskStatus.ContainsKey(task)){
+            playerTaskHandler.taskInterruptions?.Invoke(task, gameObject);
+        }
     }
+    */
 }
