@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class MedbayScannerTaskCollider: MonoBehaviour
 {
+    //caching
+    private MedbaySannerTask medbaySannerTask;
+
+    private void Start() {
+        medbaySannerTask = GetComponentInParent<MedbaySannerTask>();
+    }
+
     private void OnTriggerEnter(Collider other) {
-        MedbaySannerTask._this.OnMedBayEnter();
+        medbaySannerTask.isOnStand = true;
     }
 
-    private void OnTriggerStay(Collider other) {
-        MedbaySannerTask._this.OnMedBayStay();
+    private void OnTriggerExit(Collider other) {
+        medbaySannerTask.isOnStand = false;
     }
-
 }

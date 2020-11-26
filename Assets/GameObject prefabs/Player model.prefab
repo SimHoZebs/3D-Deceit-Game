@@ -72,8 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 7665625794601266815}
   interactRange: 3
-  allTasks: []
-  assignedTaskCount: 2
+  assignedTaskCount: 4
 --- !u!54 &1785151036
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -179,6 +178,10 @@ PrefabInstance:
       propertyPath: attachTarget
       value: 
       objectReference: {fileID: 7395103939583132854}
+    - target: {fileID: 885703287, guid: 2567c61f277ebf7488192fcf37aa0d97, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 7920564517552102924}
     - target: {fileID: 885703287, guid: 2567c61f277ebf7488192fcf37aa0d97, type: 3}
       propertyPath: attachTargetTransform
       value: 

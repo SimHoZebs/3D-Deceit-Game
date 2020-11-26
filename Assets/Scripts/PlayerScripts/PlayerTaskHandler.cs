@@ -8,13 +8,13 @@ public class PlayerTaskHandler : MonoBehaviour{
     //Customization
     [SerializeField] private Camera cam;
     [SerializeField] private float interactRange = 3f;
-    [SerializeField]private int assignedTaskCount = 2;
+    [SerializeField] private int assignedTaskCount = 3;
+    private GameObject targetObj;
 
     //Player task response collection
     public event Action<GameObject, GameObject> taskStartRsvps;
     public event Action<GameObject> taskStopRsvps;
 
-    private GameObject targetObj;
     public Dictionary<GameObject, int> assignedTasks = new Dictionary<GameObject, int>();
 
     //Caching

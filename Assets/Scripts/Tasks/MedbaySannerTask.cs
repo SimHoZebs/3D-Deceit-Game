@@ -4,44 +4,62 @@ using UnityEngine;
 
 public class MedbaySannerTask : TaskBase
 {
+    [Header("Customization")]
     [SerializeField] private float taskDuration = 10f;
     [SerializeField] private float onTaskDuration;
     private float taskStartTime;
-    public static MedbaySannerTask _this;
+    public bool isOnStand = false;
 
-    public override void Start() {
-        base.Start();
+    private void Update() {
 
-        _this = this;
-    }
-
-    public void OnMedBayEnter(){
-
-
-    }
-
-    public void OnMedBayStay(){        
-        if (!taskOnGoing && onTaskDuration < taskDuration){
-            onTaskDuration = Time.time - taskStartTime;
-            taskOnGoing = true;
-        }
-
-        //if task isn't considered complete but we stood there long enough
-        else if (taskOnGoing && onTaskDuration >= taskDuration){
-            //task is complete
-            taskOnGoing = false;
-            TaskFinish(thisTaskObj);
+        if (taskOnGoing){
+            if (isOnStand && onTaskDuration < taskDuration){
+                onTaskDuration = Time.time - taskStartTime;
+            } 
+            else if(onTaskDuration >= taskDuration){
+                TaskFinish(thisTaskObj);
+            }
+            else{
+                TaskStopRsvp(thisTaskObj);
+            }
         }
     }
 
     public override void TaskStartRsvp(GameObject task, GameObject player)
     {
-        //Medbay scan task is not a interact task.
+        base.TaskStartRsvp(task, player);
+        if (task == thisTaskObj && isOnStand){
+
+            taskStartTime = Time.time;
+        }
+        else{
+            TaskStopRsvp(thisTaskObj);
+        }
     }
 
     public override void TaskStopRsvp(GameObject task)
     {
-        //Medbay scan task is not a interact task.
+        base.TaskStopRsvp(task);
+
+        if (task == thisTaskObj){
+
+            taskStartTime = 0f;
+            onTaskDuration = 0f;
+            ClearTaskingPlayerInfo();
+        }
+
+    }
+
+    public override void TaskFinish(GameObject task)
+    {
+        base.TaskFinish(task);
+
+        if (task == thisTaskObj){
+
+            taskStartTime = 0f;
+            onTaskDuration = 0f;
+            ClearTaskingPlayerInfo();
+        }
     }
 
 

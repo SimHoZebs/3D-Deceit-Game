@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TaskBase : MonoBehaviour {
 
+    [Header("Debugging")]
     public bool taskOnGoing;
     public bool isTaskModeTask = false;
     public CameraControl taskingPlayerCamControl;   //PlayerCamControl
@@ -76,7 +77,7 @@ public class TaskBase : MonoBehaviour {
     }
 
     public bool IsTaskingPlayerTask(string status){
-        if (status == "notStarted" && TaskingPlayerThisTaskStatus()[thisTaskObj] == GameProperties.taskOnGoing){
+        if (status == "notStarted" && TaskingPlayerThisTaskStatus()[thisTaskObj] == GameProperties.taskNotStarted){
             return true;
         }
         else if (status == "onGoing" && TaskingPlayerThisTaskStatus()[thisTaskObj] == GameProperties.taskOnGoing){
