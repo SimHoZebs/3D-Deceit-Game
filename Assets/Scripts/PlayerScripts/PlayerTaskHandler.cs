@@ -8,7 +8,7 @@ public class PlayerTaskHandler : MonoBehaviour{
     //Customization
     [SerializeField] private Camera cam;
     [SerializeField] private float interactRange = 3f;
-    [SerializeField] private int assignedTaskCount = 3;
+    [SerializeField] private int assignTaskCount = 3;
     private GameObject targetObj;
 
     //Player task response collection
@@ -40,7 +40,9 @@ public class PlayerTaskHandler : MonoBehaviour{
     }
 
     private void RandomlyAssignTask(){
-        for (int i=0; i < assignedTaskCount; i++){
+        int assignedTaskCount = 0;
+
+        while (assignedTaskCount < assignTaskCount){
 
             var randomTaskIndex = UnityEngine.Random.Range(0, allTasks.Count);
             var selectedRandomTask = allTasks[randomTaskIndex];
@@ -54,6 +56,8 @@ public class PlayerTaskHandler : MonoBehaviour{
                 Debug.Log("added " + selectedRandomTask.name);
                 assignedTasks.Add(selectedRandomTask, GameProperties.taskNotStarted);
                 allTasks.Remove(selectedRandomTask);
+
+                assignedTaskCount++;
             }
         }
     }
