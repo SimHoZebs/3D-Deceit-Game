@@ -8,31 +8,30 @@ public class WireTask : TaskBase
     public override void Start()
     {
         base.Start();
-        isInteractionModeTask = true;
+        isTaskModeTask = true;
     }
 
-    public override void TaskInteractResponse(GameObject task, GameObject player)
+    public override void TaskStartRsvp(GameObject task, GameObject player)
     {
-        base.TaskInteractResponse(task, player);
+        base.TaskStartRsvp(task, player);
 
         if (task == thisTaskObj){
         }
     }
 
-    public override void TaskInterruptResponse(GameObject task)
+    public override void TaskStopRsvp(GameObject task)
     {
-        base.TaskInterruptResponse(task);
+        base.TaskStopRsvp(task);
 
     }
 
-    public override void TaskComplete(GameObject task)
+    public override void TaskFinish(GameObject task)
     {
-        base.TaskComplete(task);
+        base.TaskFinish(task);
     }
 
-    public override void ClearInteractingPlayerInfo()
+    public override void ClearTaskingPlayerInfo()
     {
-        base.ClearInteractingPlayerInfo();
-        interactingPlayerCameraControl = null;
+        base.ClearTaskingPlayerInfo();
     }
 }

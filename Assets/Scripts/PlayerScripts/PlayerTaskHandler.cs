@@ -5,29 +5,46 @@ using UnityEngine;
 
 public class PlayerTaskHandler : MonoBehaviour{
 
-    //stores taskName and status in int
+    //Customization
     [SerializeField] private Camera cam;
     [SerializeField] private float interactRange = 3f;
-    public event Action<GameObject, GameObject> taskInteractions;
-    public event Action<GameObject> taskInterruptions;
-    public List<GameObject> allTasks = new List<GameObject>();
+    [SerializeField]private int assignedTaskCount = 2;
 
-    public int assignedTaskCount = 2;
+    //Player task response collection
+    public event Action<GameObject, GameObject> taskStartRsvps;
+    public event Action<GameObject> taskStopRsvps;
+
     private GameObject targetObj;
-    private GameObject player;
-
     public Dictionary<GameObject, int> assignedTasks = new Dictionary<GameObject, int>();
 
+    //Caching
+    private List<GameObject> allTasks = GameProperties.allTasks;
     private InputHandler inputHandler;
+
     private void Start() {
         inputHandler = gameObject.GetComponent<InputHandler>();
-        allTasks = GameProperties.allTasks;
 
+        RandomlyAssignTask();
+    }
+
+    private void Update() {
+
+        if (inputHandler.isInteracting){
+            targetObj = TargetedObj();
+            PlayerStartTask();
+        }
+        if (inputHandler.hasInterrupted){
+            PlayerStopTask();
+        }
+        
+    }
+
+    private void RandomlyAssignTask(){
         for (int i=0; i < assignedTaskCount; i++){
 
             var randomTaskIndex = UnityEngine.Random.Range(0, allTasks.Count);
             var selectedRandomTask = allTasks[randomTaskIndex];
-            var selectedRandomTaskName = selectedRandomTask.name;
+            var selectedRandomTaskName = allTasks[randomTaskIndex].name;
 
             if (TaskIsDuplicate(selectedRandomTask)){
                 allTasks.Remove(selectedRandomTask);
@@ -41,25 +58,10 @@ public class PlayerTaskHandler : MonoBehaviour{
         }
     }
 
-    private void Update() {
-
-        if (inputHandler.isInteracting){
-            targetObj = TargetedObj();
-            PlayerInteract(targetObj, player);
-        }
-        if (inputHandler.hasInterrupted){
-            PlayerInterrupt(targetObj, player);
-        }
-        
-    }
-
     private bool TaskIsDuplicate(GameObject randomTask){
 
         foreach (GameObject task in assignedTasks.Keys){
-            if (task.name != randomTask.name){
-                continue;
-            }
-            else{
+            if (task.name == randomTask.name){
                 return true;
             }
         }
@@ -68,12 +70,13 @@ public class PlayerTaskHandler : MonoBehaviour{
 
 
     private GameObject TargetedObj(){
+        //TargetObj can be null, and should have no response if it is.
 
-        //ray stores information about a ray, such as its starting position 
+        //ray stores information about how a ray should look
         var ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        //Physics.Raycast uses the data stored in ray and casts a ray
-        //Physics.Raycast returns a bool for if it hit an object
+        //Physics.Raycast casts the ray using that info
+        //and returns a bool whether something collided within interactRange
         //assigns value Vector3 direction to hit
         RaycastHit hit;
 
@@ -82,16 +85,18 @@ public class PlayerTaskHandler : MonoBehaviour{
         return rayHit && hit.transform.CompareTag("Interactable")? hit.transform.gameObject : null;
     }
 
-    private void PlayerInteract(GameObject task, GameObject player){
-        if (task != null && assignedTasks.ContainsKey(task)){
-            Debug.Log("Player has interacted with " + task.name);
-            taskInteractions?.Invoke(task, gameObject);
+    private void PlayerStartTask(){
+
+        if (targetObj != null && assignedTasks.ContainsKey(targetObj)){
+            Debug.Log("Player has interacted with " + targetObj.name);
+            taskStartRsvps?.Invoke(targetObj, gameObject);
         }
     }
 
-    private void PlayerInterrupt(GameObject task, GameObject player){
-        if (targetObj != null && assignedTasks.ContainsKey(task)){
-            taskInterruptions?.Invoke(task);
+    private void PlayerStopTask(){
+
+        if (targetObj != null && assignedTasks.ContainsKey(targetObj)){
+            taskStopRsvps?.Invoke(targetObj);
         }
     }
 

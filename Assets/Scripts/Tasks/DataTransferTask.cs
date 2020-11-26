@@ -13,78 +13,77 @@ public class DataTransferTask : TaskBase {
         }
         else if(onTaskDuration >= taskDuration && taskOnGoing){
             Debug.Log("upload complete");
-            TaskComplete(thisTaskObj);
+            TaskFinish(thisTaskObj);
         }
     }
 
-    public override void TaskInteractResponse(GameObject taskObj, GameObject player){
-        base.TaskInteractResponse(taskObj, player);
+    public override void TaskStartRsvp(GameObject taskObj, GameObject player){
+        base.TaskStartRsvp(taskObj, player);
 
         if (taskObj == thisTaskObj){
 
             if (thisTaskName == "DataDownloadTask"){
-                DownloadInteractResponse();
+                DownloadStartRsvp();
             }
             else{
-                UploadInteractResponse();
+                UploadStartRsvp();
             }
 
         }
     }
 
-    private void DownloadInteractResponse(){
+    private void DownloadStartRsvp(){
         taskStartTime = Time.time;
     }
 
-    private void UploadInteractResponse(){
+    private void UploadStartRsvp(){
 
         GameObject downloadTask = null;
 
-        foreach (GameObject assignedTask in interactingPlayerTaskHandler.assignedTasks.Keys){
+        foreach (GameObject assignedTask in taskingPlayerTaskHandler.assignedTasks.Keys){
             if (assignedTask.name == "DataDownloadTask"){
                 downloadTask = assignedTask;
                 break;
             }
         }
 
-        if (interactingPlayerTaskHandler.assignedTasks[downloadTask] != GameProperties.taskComplete){
+        if (taskingPlayerTaskHandler.assignedTasks[downloadTask] != GameProperties.taskComplete){
             Debug.Log("Download isn't done!");
-            TaskInterruptResponse(thisTaskObj);
+            TaskStopRsvp(thisTaskObj);
         }
         else{
             Debug.Log("Upload starting");
             taskStartTime = Time.time;
-            interactingPlayerCameraControl.ChangeCamMode(thisTaskObj);
+            taskingPlayerCamControl.ChangeCamMode(thisTaskObj);
         }
     }
 
 
-    public override void TaskInterruptResponse(GameObject taskObj){
-        base.TaskInterruptResponse(taskObj);
+    public override void TaskStopRsvp(GameObject taskObj){
+        base.TaskStopRsvp(taskObj);
 
         if (taskObj == thisTaskObj){
             taskStartTime = 0f;
 
-            ClearInteractingPlayerInfo();
+            ClearTaskingPlayerInfo();
         }
 
     }
 
-    public override void TaskComplete(GameObject taskObj)
+    public override void TaskFinish(GameObject taskObj)
     {
-        base.TaskComplete(taskObj);
+        base.TaskFinish(taskObj);
 
         if (taskObj == thisTaskObj){
             taskStartTime = 0f;
 
-            ClearInteractingPlayerInfo();
+            ClearTaskingPlayerInfo();
         }
 
     }
 
-    public override void ClearInteractingPlayerInfo()
+    public override void ClearTaskingPlayerInfo()
     {
-        base.ClearInteractingPlayerInfo();
-        interactingPlayerCameraControl = null;
+        base.ClearTaskingPlayerInfo();
     }
 }

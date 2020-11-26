@@ -8,26 +8,26 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private int headFollowModeId = 0;
     [SerializeField] private Vector3 headFollowModeCamOffset = new Vector3(0f, 1.6f, 0f);
     [SerializeField] private float camSensitivity = 2.0f;
-    [SerializeField] private Transform attachTargetTransform;
+    [SerializeField] private Transform playerTransform;
 
     [Header("Interaction Mode")]
-    [SerializeField] private int interactionModeId = 1;
+    [SerializeField] private int taskModeId = 1;
     [SerializeField] private GameObject focusObj;
-    [SerializeField] private Vector3 interactionModeCamOffset = new Vector3(0f, 0f, -2f);
+    [SerializeField] private Vector3 taskModeCamOffset = new Vector3(0f, 0f, -2f);
     //interact with public variables
 
     //Visualization purpose
     [Header("Debugging data")]
     [SerializeField] private float xAxis, yAxis = 0.0f;
-    private int currentCamMode;
+    private int currCamMode;
 
     private void Update(){
 
-        if (currentCamMode == headFollowModeId){
+        if (currCamMode == headFollowModeId){
             HeadFollowMode();
         }
-        else if(currentCamMode == interactionModeId){
-            InteractionMode(focusObj);
+        else if(currCamMode == taskModeId){
+            TaskMode(focusObj);
         }
     }
 
@@ -35,12 +35,12 @@ public class CameraControl : MonoBehaviour
 
         if (task == null){
             Debug.Log("Normal Mode");
-            currentCamMode = headFollowModeId;
+            currCamMode = headFollowModeId;
             focusObj = null;
         }
         else{
             Debug.Log("Interaction Mode");
-            currentCamMode = interactionModeId;
+            currCamMode = taskModeId;
             focusObj = task;
         }
     }
@@ -48,7 +48,7 @@ public class CameraControl : MonoBehaviour
     private void HeadFollowMode(){
 
         //Have same position as the attachTarget with an offset
-        transform.position = attachTargetTransform.position + headFollowModeCamOffset;
+        transform.position = playerTransform.position + headFollowModeCamOffset;
 
         //get mouse coords
         xAxis += camSensitivity * Input.GetAxis("Mouse X");
@@ -61,7 +61,7 @@ public class CameraControl : MonoBehaviour
         //Thanks StackOverflow
     }
 
-    private void InteractionMode(GameObject taskObj){
-        transform.position = taskObj.transform.position + interactionModeCamOffset;
+    private void TaskMode(GameObject taskObj){
+        transform.position = taskObj.transform.position + taskModeCamOffset;
     }
 }

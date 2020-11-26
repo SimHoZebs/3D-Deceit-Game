@@ -30,16 +30,16 @@ public class MedbaySannerTask : TaskBase
         else if (taskOnGoing && onTaskDuration >= taskDuration){
             //task is complete
             taskOnGoing = false;
-            TaskComplete(thisTaskObj);
+            TaskFinish(thisTaskObj);
         }
     }
 
-    public override void TaskInteractResponse(GameObject task, GameObject player)
+    public override void TaskStartRsvp(GameObject task, GameObject player)
     {
         //Medbay scan task is not a interact task.
     }
 
-    public override void TaskInterruptResponse(GameObject task)
+    public override void TaskStopRsvp(GameObject task)
     {
         //Medbay scan task is not a interact task.
     }

@@ -11,14 +11,14 @@ public class MovementControl : MonoBehaviour
     //object instancing
     [SerializeField] private GameObject cam;
     private Animator animator;
-    private CharacterController rigidBody;
+    private CharacterController charController;
     private InputHandler inputHandler;
 
     void Start()
     {
         //caching gameObjs
         animator = gameObject.GetComponent<Animator>();
-        rigidBody = gameObject.GetComponent<CharacterController>();
+        charController = gameObject.GetComponent<CharacterController>();
         inputHandler = gameObject.GetComponentInChildren<InputHandler>();
     }
 
@@ -51,7 +51,7 @@ public class MovementControl : MonoBehaviour
         //account for sprinting
         float currentAccel = inputHandler.isSprinting? runAccel : walkAccel;
         //Normalize vector size and multiply to target accel for constant vel
-        rigidBody.SimpleMove(Vector3.Normalize(targetVel) * currentAccel);
+        charController.SimpleMove(Vector3.Normalize(targetVel) * currentAccel);
     }
 
 }
