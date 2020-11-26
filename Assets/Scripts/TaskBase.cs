@@ -28,16 +28,20 @@ public class TaskBase : MonoBehaviour {
     }
 
     public virtual void TaskStartRsvp(GameObject task, GameObject player){
-        taskingPlayer = player;
-        taskingPlayerTaskHandler = taskingPlayer.GetComponentInChildren<PlayerTaskHandler>();
+        if (task == thisTaskObj){
 
-        if (task == thisTaskObj && IsTaskingPlayerTask("notStarted")){
-            Debug.Log(string.Concat("Task ", thisTaskName, " is initiated"));
-            taskOnGoing = true;
-            TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskOnGoing;
-            taskingPlayerCamControl = isTaskModeTask? taskingPlayer.GetComponentInChildren<CameraControl>(): null;
+            taskingPlayer = player;
+            taskingPlayerTaskHandler = taskingPlayer.GetComponentInChildren<PlayerTaskHandler>();
 
-            taskingPlayerCamControl?.ChangeCamMode(thisTaskObj);
+            if (IsTaskingPlayerTask("notStarted")){
+
+                Debug.Log(string.Concat("Task ", thisTaskName, " is initiated"));
+                taskOnGoing = true;
+                TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskOnGoing;
+                taskingPlayerCamControl = isTaskModeTask? taskingPlayer.GetComponentInChildren<CameraControl>(): null;
+
+                taskingPlayerCamControl?.ChangeCamMode(thisTaskObj);
+            }
         }
     }
 
