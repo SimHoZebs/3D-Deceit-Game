@@ -11717,11 +11717,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224374713}
   m_Mesh: {fileID: 4300000, guid: 8386fa60b76534bc0856f1d023537484, type: 3}
---- !u!4 &1230534870 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7920564517552102924, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
-  m_PrefabInstance: {fileID: 1522857063}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1313494899
 GameObject:
   m_ObjectHideFlags: 0
@@ -13591,14 +13586,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 898416498, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
-      propertyPath: assignedTaskCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1752742957966956287, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
-      propertyPath: playerTransform
-      value: 
-      objectReference: {fileID: 1230534870}
     - target: {fileID: 7395103939583132854, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
       propertyPath: m_Name
       value: Player model
@@ -19396,17 +19383,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2338987210865726868, guid: cfda48bae068ffb4e8ac37541e03e14a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5484328148363428202, guid: cfda48bae068ffb4e8ac37541e03e14a, type: 3}
       propertyPath: m_Name
       value: MedbayScannerTask
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484328148363428202, guid: cfda48bae068ffb4e8ac37541e03e14a, type: 3}
-      propertyPath: m_TagString
-      value: Interactable
       objectReference: {fileID: 0}
     - target: {fileID: 6277324461736996059, guid: cfda48bae068ffb4e8ac37541e03e14a, type: 3}
       propertyPath: m_RootOrder

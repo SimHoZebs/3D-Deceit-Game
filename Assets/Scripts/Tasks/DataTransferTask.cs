@@ -6,13 +6,17 @@ public class DataTransferTask : TaskBase {
     [SerializeField] private float onTaskDuration = 0f;
     private float taskStartTime = 0f;
 
+    public override void Start() {
+        base.Start();
+        isTaskModeTask = true;
+    }
+
     private void Update() {
 
         if (taskOnGoing && onTaskDuration < taskDuration){
             onTaskDuration = Time.time - taskStartTime;
         }
         else if(onTaskDuration >= taskDuration && taskOnGoing){
-            Debug.Log("upload complete");
             TaskFinish(thisTaskObj);
         }
     }

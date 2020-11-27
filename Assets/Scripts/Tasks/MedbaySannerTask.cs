@@ -32,9 +32,6 @@ public class MedbaySannerTask : TaskBase
 
             taskStartTime = Time.time;
         }
-        else{
-            TaskStopRsvp(thisTaskObj);
-        }
     }
 
     public override void TaskStopRsvp(GameObject task)
