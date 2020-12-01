@@ -23,7 +23,6 @@ public class TaskBase : MonoBehaviour {
         foreach(GameObject player in playerList){
             var playerTaskHandler = player.GetComponentInChildren<PlayerTaskHandler>();
             playerTaskHandler.taskStartRsvps += TaskStartRsvp;
-            playerTaskHandler.taskStopRsvps += TaskStopRsvp;
             GameProperties.allTasks.Add(thisTaskObj);
         }
     }

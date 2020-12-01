@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 1699445326937331340}
   m_Layer: 0
   m_Name: Download Task
-  m_TagString: Interactable
+  m_TagString: Task
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -345,10 +345,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskOnGoing: 0
-  isInteractionModeTask: 0
-  interactingPlayerCameraControl: {fileID: 0}
-  interactingPlayer: {fileID: 0}
-  interactingPlayerTaskHandler: {fileID: 0}
+  isTaskModeTask: 0
+  taskingPlayerCamControl: {fileID: 0}
+  taskingPlayer: {fileID: 0}
+  taskingPlayerTaskHandler: {fileID: 0}
   thisTaskObj: {fileID: 0}
   thisTaskName: 
   taskDuration: 8.5

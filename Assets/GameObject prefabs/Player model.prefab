@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 474760114}
   - component: {fileID: 2743993681196239871}
   - component: {fileID: 898416498}
+  - component: {fileID: 38029007}
   m_Layer: 8
   m_Name: Handler
   m_TagString: Untagged
@@ -51,13 +52,15 @@ MonoBehaviour:
   sprint: 304
   interact: 101
   interrupt: 116
+  interactRange: 3
+  cam: {fileID: 7665625794601266815}
   isMovingUp: 0
   isMovingDown: 0
   isMovingLeft: 0
   isMovingRight: 0
   isSprinting: 0
-  isInteracting: 0
-  hasInterrupted: 0
+  tryInteract: 0
+  tryInterrupt: 0
 --- !u!114 &898416498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,9 +73,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40bac319c76d5940875611707afe953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 7665625794601266815}
-  interactRange: 3
-  assignedTaskCount: 4
+  assignTaskCount: 5
+--- !u!114 &38029007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474760113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67b9a77b1b9d394893382a308dd127d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &1785151036
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -104,7 +117,7 @@ CharacterController:
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.25
-  m_SkinWidth: 0.01
+  m_SkinWidth: 0.1
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!95 &1092300143
@@ -186,6 +199,10 @@ PrefabInstance:
       propertyPath: attachTargetTransform
       value: 
       objectReference: {fileID: 7920564517552102924}
+    - target: {fileID: 885703287, guid: 2567c61f277ebf7488192fcf37aa0d97, type: 3}
+      propertyPath: headFollowModeCamOffset.z
+      value: -0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8228982950054427377, guid: 2567c61f277ebf7488192fcf37aa0d97, type: 3}
       propertyPath: m_Name
       value: Camera
