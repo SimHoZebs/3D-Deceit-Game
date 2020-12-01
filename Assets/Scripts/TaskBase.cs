@@ -33,21 +33,18 @@ public class TaskBase : MonoBehaviour {
             taskingPlayer = player;
             taskingPlayerTaskHandler = taskingPlayer.GetComponentInChildren<PlayerTaskHandler>();
 
-            if (IsTaskingPlayerTask("notStarted")){
+            Debug.Log(string.Concat("Task ", thisTaskName, " is initiated"));
+            taskOnGoing = true;
+            TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskOnGoing;
+            taskingPlayerCamControl = isTaskModeTask? taskingPlayer.GetComponentInChildren<CameraControl>(): null;
 
-                Debug.Log(string.Concat("Task ", thisTaskName, " is initiated"));
-                taskOnGoing = true;
-                TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskOnGoing;
-                taskingPlayerCamControl = isTaskModeTask? taskingPlayer.GetComponentInChildren<CameraControl>(): null;
-
-                taskingPlayerCamControl?.ChangeCamMode(thisTaskObj);
-            }
+            taskingPlayerCamControl?.ChangeCamMode(thisTaskObj);
         }
     }
 
     public virtual void TaskStopRsvp(GameObject task){
 
-        if (task == thisTaskObj && IsTaskingPlayerTask("onGoing")){
+        if (task == thisTaskObj && IsTaskingPlayerTask(GameProperties.taskOnGoing)){
             Debug.Log(string.Concat("Task ", thisTaskName, " is interrupted"));
             taskOnGoing = false;
             TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskNotStarted;
@@ -59,7 +56,7 @@ public class TaskBase : MonoBehaviour {
 
     public virtual void TaskFinish(GameObject task){
 
-        if (task == thisTaskObj && IsTaskingPlayerTask("onGoing")){
+        if (task == thisTaskObj && IsTaskingPlayerTask(GameProperties.taskOnGoing)){
             Debug.Log(string.Concat("Task ", thisTaskName, " is complete"));
             taskOnGoing = false;
             TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskComplete;
@@ -75,20 +72,6 @@ public class TaskBase : MonoBehaviour {
 
     }
 
-    public bool IsTaskingPlayerTask(string status){
-        if (status == "notStarted" && TaskingPlayerThisTaskStatus()[thisTaskObj] == GameProperties.taskNotStarted){
-            return true;
-        }
-        else if (status == "onGoing" && TaskingPlayerThisTaskStatus()[thisTaskObj] == GameProperties.taskOnGoing){
-            return true;
-        }
-        else if (status == "complete" && TaskingPlayerThisTaskStatus()[thisTaskObj] == GameProperties.taskComplete){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
+    public bool IsTaskingPlayerTask(int status) => TaskingPlayerThisTaskStatus()[thisTaskObj] == status? true:false;
     public Dictionary<GameObject, int> TaskingPlayerThisTaskStatus() => taskingPlayerTaskHandler.assignedTasks;
 }

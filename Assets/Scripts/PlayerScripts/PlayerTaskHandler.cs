@@ -5,16 +5,14 @@ using UnityEngine;
 
 public class PlayerTaskHandler : MonoBehaviour{
 
-    //Customization
+    [Header("Customization")]
     [SerializeField] private int assignTaskCount = 3;
 
     //Player task response collection
     public event Action<GameObject, GameObject> taskStartRsvps;
-
     public Dictionary<GameObject, int> assignedTasks = new Dictionary<GameObject, int>();
 
     //Caching
-    private List<GameObject> allTasks = GameProperties.allTasks;
 
     private void Start() {
         RandomlyAssignTask();
@@ -25,18 +23,18 @@ public class PlayerTaskHandler : MonoBehaviour{
 
         while (assignedTaskCount < assignTaskCount){
 
-            var randomTaskIndex = UnityEngine.Random.Range(0, allTasks.Count);
-            var selectedRandomTask = allTasks[randomTaskIndex];
-            var selectedRandomTaskName = allTasks[randomTaskIndex].name;
+            var randomTaskIndex = UnityEngine.Random.Range(0, GameProperties.allTasks.Count);
+            var selectedRandomTask = GameProperties.allTasks[randomTaskIndex];
+            var selectedRandomTaskName = GameProperties.allTasks[randomTaskIndex].name;
 
             if (AlreadyAssigned(selectedRandomTask)){
-                allTasks.Remove(selectedRandomTask);
+                GameProperties.allTasks.Remove(selectedRandomTask);
                 continue;
             }
             else{
                 Debug.Log("added " + selectedRandomTask.name);
                 assignedTasks.Add(selectedRandomTask, GameProperties.taskNotStarted);
-                allTasks.Remove(selectedRandomTask);
+                GameProperties.allTasks.Remove(selectedRandomTask);
 
                 assignedTaskCount++;
             }
@@ -53,14 +51,14 @@ public class PlayerTaskHandler : MonoBehaviour{
         return false;
     }
 
-    public void StartTask(GameObject targetObj){
+    public void AttemptTask(GameObject targetObj){
 
-        if (assignedTasks.ContainsKey(targetObj)){
-            Debug.Log("Player has interacted with " + targetObj.name);
+        if (assignedTasks.ContainsKey(targetObj) && assignedTasks[targetObj] == GameProperties.taskNotStarted){
+            Debug.Log("Player has started Task " + targetObj.name);
             taskStartRsvps?.Invoke(targetObj, gameObject);
         }
         else{
-            Debug.Log("Player is not assigned this task");
+            Debug.Log("Player is either not assigned or not on NotStarted stage of this task");
         }
     }
 

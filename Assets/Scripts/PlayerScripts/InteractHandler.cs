@@ -25,7 +25,7 @@ public class InteractHandler : MonoBehaviour
                 interactableRsvps?.Invoke(gameObject, targetObj);
             }
             else if (objTag == "Task"){
-                playerTaskHandler.StartTask(targetObj);
+                playerTaskHandler.AttemptTask(targetObj);
             }
         }
     }
