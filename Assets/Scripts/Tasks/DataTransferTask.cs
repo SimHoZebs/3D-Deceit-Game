@@ -58,7 +58,6 @@ public class DataTransferTask : TaskBase {
         else{
             Debug.Log("Upload starting");
             taskStartTime = Time.time;
-            taskingPlayerCamControl.ChangeCamMode(thisTaskObj);
         }
     }
 
