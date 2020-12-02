@@ -32,10 +32,10 @@ public class InspectSampleTaskSample : MonoBehaviour
         thisObjMaterial.color = color;
     }
 
-    private void InteractableRsvp(GameObject player, GameObject interactable){
+    private void InteractableRsvp(GameObject playerHandler, GameObject interactable){
         if (thisObj == interactable){
 
-            Debug.Log(player.name + "Interacted with this");
+            Debug.Log(playerHandler.name + "Interacted with this");
             inspectSampleTask.chosenSample = thisObj;
         }
     }

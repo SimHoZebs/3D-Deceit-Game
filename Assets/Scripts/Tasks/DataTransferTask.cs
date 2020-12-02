@@ -21,8 +21,8 @@ public class DataTransferTask : TaskBase {
         }
     }
 
-    public override void TaskStartRsvp(GameObject taskObj, GameObject player){
-        base.TaskStartRsvp(taskObj, player);
+    public override void TaskStartRsvp(GameObject taskObj, GameObject playerHandlerObj){
+        base.TaskStartRsvp(taskObj, playerHandlerObj);
 
         if (taskObj == thisTaskObj){
 

@@ -25,20 +25,20 @@ public class MedbaySannerTask : TaskBase
         }
     }
 
-    public override void TaskStartRsvp(GameObject task, GameObject player)
+    public override void TaskStartRsvp(GameObject taskObj, GameObject playerHandler)
     {
-        base.TaskStartRsvp(task, player);
-        if (task == thisTaskObj && isOnStand){
+        base.TaskStartRsvp(taskObj, playerHandler);
+        if (taskObj == thisTaskObj && isOnStand){
 
             taskStartTime = Time.time;
         }
     }
 
-    public override void TaskStopRsvp(GameObject task)
+    public override void TaskStopRsvp(GameObject taskObj)
     {
-        base.TaskStopRsvp(task);
+        base.TaskStopRsvp(taskObj);
 
-        if (task == thisTaskObj){
+        if (taskObj == thisTaskObj){
 
             taskStartTime = 0f;
             onTaskDuration = 0f;
@@ -47,11 +47,11 @@ public class MedbaySannerTask : TaskBase
 
     }
 
-    public override void TaskFinish(GameObject task)
+    public override void TaskFinish(GameObject taskObj)
     {
-        base.TaskFinish(task);
+        base.TaskFinish(taskObj);
 
-        if (task == thisTaskObj){
+        if (taskObj == thisTaskObj){
 
             taskStartTime = 0f;
             onTaskDuration = 0f;

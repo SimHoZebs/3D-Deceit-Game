@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
+    [SerializeField] private Camera cam;
+
     [Header("Head-Follow Mode")]
     [SerializeField] private int headFollowModeId = 0;
     [SerializeField] private Vector3 headFollowModeCamOffset = new Vector3(0f, 1.6f, 0f);
@@ -19,7 +21,7 @@ public class CameraControl : MonoBehaviour
     //Visualization purpose
     [Header("Debugging data")]
     [SerializeField] private float xAxis, yAxis = 0.0f;
-    private int currCamMode;
+    [SerializeField] private int currCamMode = 0;
 
     private void Update(){
 
@@ -31,9 +33,9 @@ public class CameraControl : MonoBehaviour
         }
     }
 
-    public void ChangeCamMode(GameObject task){
+    public void ChangeCamMode(GameObject taskObj){
 
-        if (task == null){
+        if (taskObj == null){
             Debug.Log("Normal Mode");
             currCamMode = headFollowModeId;
             focusObj = null;
@@ -41,27 +43,27 @@ public class CameraControl : MonoBehaviour
         else{
             Debug.Log("Interaction Mode");
             currCamMode = taskModeId;
-            focusObj = task;
+            focusObj = taskObj;
         }
     }
 
     private void HeadFollowMode(){
 
         //Have same position as the attachTarget with an offset
-        transform.position = playerTransform.position + headFollowModeCamOffset;
+        cam.transform.position = playerTransform.position + headFollowModeCamOffset;
 
         //get mouse coords
         xAxis += camSensitivity * Input.GetAxis("Mouse X");
         yAxis -= camSensitivity * Input.GetAxis("Mouse Y");
 
         //convert mouse coords to eulerAngles 
-        transform.eulerAngles = new Vector3(yAxis, xAxis, 0.0f);
+        cam.transform.eulerAngles = new Vector3(yAxis, xAxis, 0.0f);
 
         //same I too don't know wtf Euler Angles are but it works
         //Thanks StackOverflow
     }
 
     private void TaskMode(GameObject taskObj){
-        transform.position = taskObj.transform.position + taskModeCamOffset;
+        cam.transform.position = taskObj.transform.position + taskModeCamOffset;
     }
 }

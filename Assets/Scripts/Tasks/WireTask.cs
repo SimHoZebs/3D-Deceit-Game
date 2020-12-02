@@ -11,23 +11,23 @@ public class WireTask : TaskBase
         isTaskModeTask = true;
     }
 
-    public override void TaskStartRsvp(GameObject task, GameObject player)
+    public override void TaskStartRsvp(GameObject taskObj, GameObject playerHandler)
     {
-        base.TaskStartRsvp(task, player);
+        base.TaskStartRsvp(taskObj, playerHandler);
 
-        if (task == thisTaskObj){
+        if (taskObj == thisTaskObj){
         }
     }
 
-    public override void TaskStopRsvp(GameObject task)
+    public override void TaskStopRsvp(GameObject taskObj)
     {
-        base.TaskStopRsvp(task);
+        base.TaskStopRsvp(taskObj);
 
     }
 
-    public override void TaskFinish(GameObject task)
+    public override void TaskFinish(GameObject taskObj)
     {
-        base.TaskFinish(task);
+        base.TaskFinish(taskObj);
     }
 
     public override void ClearTaskingPlayerInfo()

@@ -20,11 +20,11 @@ public class InspectSampleTask : TaskBase
         sample = gameObject.GetComponentInChildren<InspectSampleTaskSample>();
     }
 
-    public override void TaskStartRsvp(GameObject task, GameObject player)
+    public override void TaskStartRsvp(GameObject taskObj, GameObject playerHandlerObj)
     {
-        base.TaskStartRsvp(task, player);
+        base.TaskStartRsvp(taskObj, playerHandlerObj);
 
-        if (task == thisTaskObj){
+        if (taskObj == thisTaskObj){
             StartCoroutine(TaskStart());
             StopCoroutine(TaskStart());
         }
@@ -50,15 +50,15 @@ public class InspectSampleTask : TaskBase
         }
     }
 
-    public override void TaskStopRsvp(GameObject task)
+    public override void TaskStopRsvp(GameObject taskObj)
     {
-        base.TaskStopRsvp(task);
+        base.TaskStopRsvp(taskObj);
         ClearTaskingPlayerInfo();
     }
 
-    public override void TaskFinish(GameObject task)
+    public override void TaskFinish(GameObject taskObj)
     {
-        base.TaskFinish(task);
+        base.TaskFinish(taskObj);
         ClearTaskingPlayerInfo();
 
     }
