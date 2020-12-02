@@ -10,14 +10,14 @@ public class InspectSampleTask : TaskBase
     [SerializeField] private Color correctSampleColor;
 
     [Header("Samples")]
-    private InspectSampleTaskSample sample;
+    private SampleBehaviour sample;
     public List<GameObject> sampleList = new List<GameObject>();
     public GameObject chosenSample;
 
     public override void Start() {
         //This Start() runs later than InspectSampleTaskSample... so far
         base.Start();
-        sample = gameObject.GetComponentInChildren<InspectSampleTaskSample>();
+        sample = gameObject.GetComponentInChildren<SampleBehaviour>();
     }
 
     public override void TaskStartRsvp(GameObject taskObj, GameObject playerHandlerObj)
@@ -35,7 +35,7 @@ public class InspectSampleTask : TaskBase
         yield return new WaitForSeconds(taskDuration);
 
         var randomIndex = Random.Range(0, sampleList.Count);
-        sampleList[randomIndex].GetComponent<InspectSampleTaskSample>().ChangeColor(correctSampleColor);
+        sampleList[randomIndex].GetComponent<SampleBehaviour>().ChangeColor(correctSampleColor);
 
         yield return new WaitUntil(() => chosenSample != null);
 

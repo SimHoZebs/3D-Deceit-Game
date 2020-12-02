@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InspectSampleTaskSample : MonoBehaviour
+public class SampleBehaviour : MonoBehaviour
 {
     private InspectSampleTask inspectSampleTask;
     private GameObject thisObj;
