@@ -37,26 +37,26 @@ public class MedbaySannerTask : TaskBase
     public override void TaskStopRsvp(GameObject taskObj)
     {
         base.TaskStopRsvp(taskObj);
-
         if (taskObj == thisTaskObj){
 
-            taskStartTime = 0f;
-            onTaskDuration = 0f;
             ClearTaskingPlayerInfo();
         }
-
     }
 
     public override void TaskFinish(GameObject taskObj)
     {
         base.TaskFinish(taskObj);
-
         if (taskObj == thisTaskObj){
 
-            taskStartTime = 0f;
-            onTaskDuration = 0f;
             ClearTaskingPlayerInfo();
         }
+    }
+
+    public override void ClearTaskingPlayerInfo()
+    {
+        base.ClearTaskingPlayerInfo();
+        taskStartTime = 0f;
+        onTaskDuration = 0f;
     }
 
 

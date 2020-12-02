@@ -23,8 +23,8 @@ public class InspectSampleTask : TaskBase
     public override void TaskStartRsvp(GameObject taskObj, GameObject playerHandlerObj)
     {
         base.TaskStartRsvp(taskObj, playerHandlerObj);
-
         if (taskObj == thisTaskObj){
+
             StartCoroutine(TaskStart());
             StopCoroutine(TaskStart());
         }
@@ -53,14 +53,20 @@ public class InspectSampleTask : TaskBase
     public override void TaskStopRsvp(GameObject taskObj)
     {
         base.TaskStopRsvp(taskObj);
-        ClearTaskingPlayerInfo();
+
+        if (taskObj == thisTaskObj){
+
+            ClearTaskingPlayerInfo();
+        }
     }
 
     public override void TaskFinish(GameObject taskObj)
     {
         base.TaskFinish(taskObj);
-        ClearTaskingPlayerInfo();
+        if (taskObj == thisTaskObj){
 
+            ClearTaskingPlayerInfo();
+        }
     }
 
     public override void ClearTaskingPlayerInfo()

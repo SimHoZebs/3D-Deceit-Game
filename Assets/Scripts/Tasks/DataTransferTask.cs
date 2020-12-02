@@ -66,7 +66,6 @@ public class DataTransferTask : TaskBase {
         base.TaskStopRsvp(taskObj);
 
         if (taskObj == thisTaskObj){
-            taskStartTime = 0f;
 
             ClearTaskingPlayerInfo();
         }
@@ -78,7 +77,6 @@ public class DataTransferTask : TaskBase {
         base.TaskFinish(taskObj);
 
         if (taskObj == thisTaskObj){
-            taskStartTime = 0f;
 
             ClearTaskingPlayerInfo();
         }
@@ -87,6 +85,7 @@ public class DataTransferTask : TaskBase {
 
     public override void ClearTaskingPlayerInfo()
     {
+        taskStartTime = 0f;
         base.ClearTaskingPlayerInfo();
     }
 }

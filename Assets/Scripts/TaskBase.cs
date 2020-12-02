@@ -27,8 +27,8 @@ public class TaskBase : MonoBehaviour {
         }
     }
 
-    public virtual void TaskStartRsvp(GameObject task, GameObject playerHandler){
-        if (task == thisTaskObj){
+    public virtual void TaskStartRsvp(GameObject taskObj, GameObject playerHandler){
+        if (taskObj == thisTaskObj){
 
             taskingPlayerHandler = playerHandler;
             taskingPlayerTaskHandler = taskingPlayerHandler.GetComponent<PlayerTaskHandler>();
@@ -51,7 +51,6 @@ public class TaskBase : MonoBehaviour {
 
             taskingPlayerCamControl?.ChangeCamMode(null);
         }
-
     }
 
     public virtual void TaskFinish(GameObject taskObj){

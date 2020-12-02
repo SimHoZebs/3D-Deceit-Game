@@ -15,19 +15,27 @@ public class WireTask : TaskBase
     {
         base.TaskStartRsvp(taskObj, playerHandler);
 
-        if (taskObj == thisTaskObj){
-        }
     }
 
     public override void TaskStopRsvp(GameObject taskObj)
     {
         base.TaskStopRsvp(taskObj);
 
+        if (taskObj == thisTaskObj){
+            ClearTaskingPlayerInfo();
+        }
+
+
     }
 
     public override void TaskFinish(GameObject taskObj)
     {
         base.TaskFinish(taskObj);
+
+        if (taskObj == thisTaskObj){
+            ClearTaskingPlayerInfo();
+        }
+
     }
 
     public override void ClearTaskingPlayerInfo()
