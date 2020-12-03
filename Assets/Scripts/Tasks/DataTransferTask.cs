@@ -21,18 +21,14 @@ public class DataTransferTask : TaskBase {
         }
     }
 
-    public override void TaskStartRsvp(GameObject taskObj, GameObject playerHandlerObj){
-        base.TaskStartRsvp(taskObj, playerHandlerObj);
+    protected override void TaskStartRsvpInternal(){
+        base.TaskStartRsvpInternal();
 
-        if (taskObj == thisTaskObj){
-
-            if (thisTaskName == "DataDownloadTask"){
-                DownloadStartRsvp();
-            }
-            else{
-                UploadStartRsvp();
-            }
-
+        if (thisTaskName == "DataDownloadTask"){
+            DownloadStartRsvp();
+        }
+        else{
+            UploadStartRsvp();
         }
     }
 
@@ -51,7 +47,10 @@ public class DataTransferTask : TaskBase {
             }
         }
 
-        if (taskingPlayerTaskHandler.assignedTasks[downloadTask] != GameProperties.taskComplete){
+        if (downloadTask == null){
+            Debug.Log("There is no download/upload task assigned");
+        }
+        else if (taskingPlayerTaskHandler.assignedTasks[downloadTask] != GameProperties.taskComplete){
             Debug.Log("Download isn't done!");
             TaskStopRsvp(thisTaskObj);
         }
@@ -59,28 +58,6 @@ public class DataTransferTask : TaskBase {
             Debug.Log("Upload starting");
             taskStartTime = Time.time;
         }
-    }
-
-
-    public override void TaskStopRsvp(GameObject taskObj){
-        base.TaskStopRsvp(taskObj);
-
-        if (taskObj == thisTaskObj){
-
-            ClearTaskingPlayerInfo();
-        }
-
-    }
-
-    public override void TaskFinish(GameObject taskObj)
-    {
-        base.TaskFinish(taskObj);
-
-        if (taskObj == thisTaskObj){
-
-            ClearTaskingPlayerInfo();
-        }
-
     }
 
     public override void ClearTaskingPlayerInfo()

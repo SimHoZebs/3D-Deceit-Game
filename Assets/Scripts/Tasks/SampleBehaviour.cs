@@ -6,7 +6,6 @@ public class SampleBehaviour : MonoBehaviour
 {
     private InspectSampleTask inspectSampleTask;
     private GameObject thisObj;
-    private InteractHandler interactionHandler;
     private Material thisObjMaterial;
 
     public void Start() {

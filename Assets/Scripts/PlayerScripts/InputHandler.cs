@@ -18,7 +18,7 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private Camera cam;
 
     public bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight, isSprinting;
-    public bool tryInteract, holdInteract, tryInterrupt;
+    public bool tryInteract, holdingInteract, tryInterrupt;
 
     private void Update()
     {
@@ -31,7 +31,7 @@ public class InputHandler : MonoBehaviour
 
         //interaction set
         keyCheck(out tryInteract, interact, "Down");
-        keyCheck(out holdInteract, interact);
+        keyCheck(out holdingInteract, interact);
         keyCheck(out tryInterrupt, interrupt, "Down");
 
     }

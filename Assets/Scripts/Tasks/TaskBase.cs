@@ -27,7 +27,7 @@ public class TaskBase : MonoBehaviour {
         }
     }
 
-    public virtual void TaskStartRsvp(GameObject taskObj, GameObject playerHandler){
+    private void TaskStartRsvp(GameObject taskObj, GameObject playerHandler){
         if (taskObj == thisTaskObj){
 
             taskingPlayerHandler = playerHandler;
@@ -39,10 +39,16 @@ public class TaskBase : MonoBehaviour {
             taskingPlayerCamControl = isTaskModeTask? taskingPlayerHandler.GetComponent<CameraControl>(): null;
 
             taskingPlayerCamControl?.ChangeCamMode(thisTaskObj);
+
+            TaskStartRsvpInternal();
         }
     }
 
-    public virtual void TaskStopRsvp(GameObject taskObj){
+    protected virtual void TaskStartRsvpInternal(){
+
+    } 
+
+    protected void TaskStopRsvp(GameObject taskObj){
 
         if (taskObj == thisTaskObj && IsTaskingPlayerTask(GameProperties.taskOnGoing)){
             Debug.Log(string.Concat("Task ", thisTaskName, " is interrupted"));
@@ -50,10 +56,17 @@ public class TaskBase : MonoBehaviour {
             TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskNotStarted;
 
             taskingPlayerCamControl?.ChangeCamMode(null);
+
+            TaskStopRsvpInternal();
         }
     }
 
-    public virtual void TaskFinish(GameObject taskObj){
+    protected virtual void TaskStopRsvpInternal(){
+
+        ClearTaskingPlayerInfo();
+    }
+
+    protected void TaskFinish(GameObject taskObj){
 
         if (taskObj == thisTaskObj && IsTaskingPlayerTask(GameProperties.taskOnGoing)){
             Debug.Log(string.Concat("Task ", thisTaskName, " is complete"));
@@ -61,7 +74,14 @@ public class TaskBase : MonoBehaviour {
             TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskComplete;
 
             taskingPlayerCamControl?.ChangeCamMode(null);
+
+            TaskFinishInternal();
         }
+    }
+
+    protected virtual void TaskFinishInternal(){
+
+        ClearTaskingPlayerInfo();
     }
 
     public virtual void ClearTaskingPlayerInfo(){

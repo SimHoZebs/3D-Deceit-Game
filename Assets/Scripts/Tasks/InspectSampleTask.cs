@@ -20,14 +20,11 @@ public class InspectSampleTask : TaskBase
         sample = gameObject.GetComponentInChildren<SampleBehaviour>();
     }
 
-    public override void TaskStartRsvp(GameObject taskObj, GameObject playerHandlerObj)
+    protected override void TaskStartRsvpInternal()
     {
-        base.TaskStartRsvp(taskObj, playerHandlerObj);
-        if (taskObj == thisTaskObj){
-
-            StartCoroutine(TaskStart());
-            StopCoroutine(TaskStart());
-        }
+        StartCoroutine(TaskStart());
+        StopCoroutine(TaskStart());
+        base.TaskStartRsvpInternal();
     }
 
     public IEnumerator TaskStart(){
@@ -50,31 +47,11 @@ public class InspectSampleTask : TaskBase
         }
     }
 
-    public override void TaskStopRsvp(GameObject taskObj)
-    {
-        base.TaskStopRsvp(taskObj);
-
-        if (taskObj == thisTaskObj){
-
-            ClearTaskingPlayerInfo();
-        }
-    }
-
-    public override void TaskFinish(GameObject taskObj)
-    {
-        base.TaskFinish(taskObj);
-        if (taskObj == thisTaskObj){
-
-            ClearTaskingPlayerInfo();
-        }
-    }
-
     public override void ClearTaskingPlayerInfo()
     {
         base.ClearTaskingPlayerInfo();
 
         chosenSample.GetComponent<MeshRenderer>().material.color = sampleDefaultColor;
         chosenSample = null;
-
     }
 }

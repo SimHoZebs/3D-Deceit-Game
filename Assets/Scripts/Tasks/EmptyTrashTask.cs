@@ -21,7 +21,7 @@ public class EmptyTrashTask : TaskBase
 
     private void Update() {
 
-        if (taskOnGoing && taskingPlayerInputHandler.holdInteract && onTaskDuartion < taskDuration){
+        if (taskOnGoing && taskingPlayerInputHandler.holdingInteract && onTaskDuartion < taskDuration){
             Debug.Log("Holding...");
             onTaskDuartion = Time.time - taskStartTime;
         }
@@ -33,33 +33,11 @@ public class EmptyTrashTask : TaskBase
         }
     }
 
-    public override void TaskStartRsvp(GameObject taskObj, GameObject playerHandler)
+    protected override void TaskStartRsvpInternal()
     {
-        base.TaskStartRsvp(taskObj, playerHandler);
-        if(taskObj == thisTaskObj){
-
-            taskingPlayerInputHandler = taskingPlayerHandler.GetComponent<InputHandler>();
-            taskStartTime = Time.time;
-        }
-    }
-
-    public override void TaskStopRsvp(GameObject taskObj)
-    {
-        base.TaskStopRsvp(taskObj);
-
-        if (taskObj == thisTaskObj){
-
-            ClearTaskingPlayerInfo();
-        }
-    }
-
-    public override void TaskFinish(GameObject taskObj)
-    {
-        base.TaskFinish(taskObj);
-        if (taskObj == thisTaskObj){
-
-            ClearTaskingPlayerInfo();
-        }
+        base.TaskStartRsvpInternal();
+        taskingPlayerInputHandler = taskingPlayerHandler.GetComponent<InputHandler>();
+        taskStartTime = Time.time;
     }
 
     public override void ClearTaskingPlayerInfo()
