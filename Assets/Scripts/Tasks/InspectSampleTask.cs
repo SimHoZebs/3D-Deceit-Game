@@ -14,7 +14,7 @@ public class InspectSampleTask : TaskBase
     public List<GameObject> sampleList = new List<GameObject>();
     public GameObject chosenSample;
 
-    public override void Start() {
+    protected override void Start() {
         //This Start() runs later than InspectSampleTaskSample... so far
         base.Start();
         sample = gameObject.GetComponentInChildren<SampleBehaviour>();
@@ -47,7 +47,7 @@ public class InspectSampleTask : TaskBase
         }
     }
 
-    public override void ClearTaskingPlayerInfo()
+    protected override void ClearTaskingPlayerInfo()
     {
         base.ClearTaskingPlayerInfo();
 

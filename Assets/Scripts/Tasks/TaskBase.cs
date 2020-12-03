@@ -4,17 +4,17 @@ using UnityEngine;
 public class TaskBase : MonoBehaviour {
 
     [Header("Debugging")]
-    public bool taskOnGoing;
-    public bool isTaskModeTask = false;
-    public CameraControl taskingPlayerCamControl;   //PlayerCamControl
-    public GameObject taskingPlayerHandler; 
-    public PlayerTaskHandler taskingPlayerTaskHandler;    //PlayerTaskHandler
+    protected bool taskOnGoing;
+    protected bool isTaskModeTask = false;
+    protected CameraControl taskingPlayerCamControl;   //PlayerCamControl
+    protected GameObject taskingPlayerHandler; 
+    protected PlayerTaskHandler taskingPlayerTaskHandler;    //PlayerTaskHandler
 
     //caching
-    public GameObject thisTaskObj;
-    public string thisTaskName;
+    protected GameObject thisTaskObj;
+    protected string thisTaskName;
 
-    public virtual void Start() {
+    protected virtual void Start() {
 
         var playerList = GameObject.FindGameObjectsWithTag("Player");
         thisTaskObj = gameObject;
@@ -50,7 +50,7 @@ public class TaskBase : MonoBehaviour {
 
     protected void TaskStopRsvp(GameObject taskObj){
 
-        if (taskObj == thisTaskObj && IsTaskingPlayerTask(GameProperties.taskOnGoing)){
+        if (taskObj == thisTaskObj && TaskingPlayerTaskIs(GameProperties.taskOnGoing)){
             Debug.Log(string.Concat("Task ", thisTaskName, " is interrupted"));
             taskOnGoing = false;
             TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskNotStarted;
@@ -68,10 +68,10 @@ public class TaskBase : MonoBehaviour {
 
     protected void TaskFinish(GameObject taskObj){
 
-        if (taskObj == thisTaskObj && IsTaskingPlayerTask(GameProperties.taskOnGoing)){
+        if (taskObj == thisTaskObj && TaskingPlayerTaskIs(GameProperties.taskOnGoing)){
             Debug.Log(string.Concat("Task ", thisTaskName, " is complete"));
             taskOnGoing = false;
-            TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskComplete;
+            TaskingPlayerThisTaskStatus()[thisTaskObj] = GameProperties.taskFinished;
 
             taskingPlayerCamControl?.ChangeCamMode(null);
 
@@ -84,13 +84,13 @@ public class TaskBase : MonoBehaviour {
         ClearTaskingPlayerInfo();
     }
 
-    public virtual void ClearTaskingPlayerInfo(){
+    protected virtual void ClearTaskingPlayerInfo(){
         taskingPlayerHandler = null;
         taskingPlayerTaskHandler = null;
         taskingPlayerCamControl = null;
 
     }
 
-    public bool IsTaskingPlayerTask(int status) => TaskingPlayerThisTaskStatus()[thisTaskObj] == status? true:false;
-    public Dictionary<GameObject, int> TaskingPlayerThisTaskStatus() => taskingPlayerTaskHandler.assignedTasks;
+    protected bool TaskingPlayerTaskIs(int status) => TaskingPlayerThisTaskStatus()[thisTaskObj] == status? true:false;
+    private Dictionary<GameObject, int> TaskingPlayerThisTaskStatus() => taskingPlayerTaskHandler.assignedTasks;
 }

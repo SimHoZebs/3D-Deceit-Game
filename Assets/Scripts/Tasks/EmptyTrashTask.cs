@@ -13,7 +13,7 @@ public class EmptyTrashTask : TaskBase
     //caching
     private InputHandler taskingPlayerInputHandler;
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         isTaskModeTask = true;
@@ -40,7 +40,7 @@ public class EmptyTrashTask : TaskBase
         taskStartTime = Time.time;
     }
 
-    public override void ClearTaskingPlayerInfo()
+    protected override void ClearTaskingPlayerInfo()
     {
         base.ClearTaskingPlayerInfo();
         taskStartTime = onTaskDuartion = 0f;

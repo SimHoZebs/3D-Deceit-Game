@@ -31,7 +31,7 @@ public class MedbaySannerTask : TaskBase
         taskStartTime = Time.time;
     }
 
-    public override void ClearTaskingPlayerInfo()
+    protected override void ClearTaskingPlayerInfo()
     {
         base.ClearTaskingPlayerInfo();
         taskStartTime = 0f;

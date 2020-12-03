@@ -5,7 +5,7 @@ using UnityEngine;
 public class WireTask : TaskBase
 {
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         isTaskModeTask = true;
@@ -17,7 +17,7 @@ public class WireTask : TaskBase
 
     }
 
-    public override void ClearTaskingPlayerInfo()
+    protected override void ClearTaskingPlayerInfo()
     {
         base.ClearTaskingPlayerInfo();
     }

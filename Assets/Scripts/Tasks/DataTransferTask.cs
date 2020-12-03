@@ -6,7 +6,7 @@ public class DataTransferTask : TaskBase {
     [SerializeField] private float onTaskDuration = 0f;
     private float taskStartTime = 0f;
 
-    public override void Start() {
+    protected override void Start() {
         base.Start();
         isTaskModeTask = true;
     }
@@ -50,7 +50,7 @@ public class DataTransferTask : TaskBase {
         if (downloadTask == null){
             Debug.Log("There is no download/upload task assigned");
         }
-        else if (taskingPlayerTaskHandler.assignedTasks[downloadTask] != GameProperties.taskComplete){
+        else if (TaskingPlayerTaskIs(GameProperties.taskFinished)){
             Debug.Log("Download isn't done!");
             TaskStopRsvp(thisTaskObj);
         }
@@ -60,7 +60,7 @@ public class DataTransferTask : TaskBase {
         }
     }
 
-    public override void ClearTaskingPlayerInfo()
+    protected override void ClearTaskingPlayerInfo()
     {
         taskStartTime = 0f;
         base.ClearTaskingPlayerInfo();
