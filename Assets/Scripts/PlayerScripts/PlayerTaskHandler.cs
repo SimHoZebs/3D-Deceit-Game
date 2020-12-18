@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerTaskHandler : MonoBehaviour{
@@ -11,6 +10,7 @@ public class PlayerTaskHandler : MonoBehaviour{
     //Player task response collection
     public event Action<GameObject, GameObject> taskStartRsvps;
     public Dictionary<GameObject, int> assignedTasks = new Dictionary<GameObject, int>();
+    //scalable data structure for additional information required by specific tasks??
 
     //Caching
 

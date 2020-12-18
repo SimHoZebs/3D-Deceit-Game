@@ -21,7 +21,7 @@ public class EmptyTrashTask : TaskBase
 
     private void Update() {
 
-        if (taskOnGoing && taskingPlayerInputHandler.holdingInteract && onTaskDuartion < taskDuration){
+        if (taskOnGoing && taskingPlayerInputHandler.isHoldingInteract && onTaskDuartion < taskDuration){
             Debug.Log("Holding...");
             onTaskDuartion = Time.time - taskStartTime;
         }

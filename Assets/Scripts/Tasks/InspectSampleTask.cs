@@ -27,7 +27,7 @@ public class InspectSampleTask : TaskBase
         base.TaskStartRsvpInternal();
     }
 
-    public IEnumerator TaskStart(){
+    private IEnumerator TaskStart(){
 
         yield return new WaitForSeconds(taskDuration);
 

@@ -18,7 +18,7 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private Camera cam;
 
     public bool isMovingUp, isMovingDown, isMovingLeft, isMovingRight, isSprinting;
-    public bool tryInteract, holdingInteract, tryInterrupt;
+    public bool tryInteract, isHoldingInteract, isTryingInterrupt;
 
     private void Update()
     {
@@ -31,8 +31,8 @@ public class InputHandler : MonoBehaviour
 
         //interaction set
         keyCheck(out tryInteract, interact, "Down");
-        keyCheck(out holdingInteract, interact);
-        keyCheck(out tryInterrupt, interrupt, "Down");
+        keyCheck(out isHoldingInteract, interact);
+        keyCheck(out isTryingInterrupt, interrupt, "Down");
 
     }
 
@@ -50,7 +50,8 @@ public class InputHandler : MonoBehaviour
         bool rayHit = Physics.Raycast(ray, out hit, interactRange);
 
         return rayHit? hit.transform.gameObject : null;
-    }
+
+}
 
     private void keyCheck(out bool isPressingKey,KeyCode keyCode, string keyMode=""){
 

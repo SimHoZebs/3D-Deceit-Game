@@ -6,6 +6,7 @@ public class TaskBase : MonoBehaviour {
     [Header("Debugging")]
     protected bool taskOnGoing;
     protected bool isTaskModeTask = false;
+    protected bool isAssignableTask = true;
     protected CameraControl taskingPlayerCamControl;   //PlayerCamControl
     protected GameObject taskingPlayerHandler; 
     protected PlayerTaskHandler taskingPlayerTaskHandler;    //PlayerTaskHandler
@@ -20,11 +21,14 @@ public class TaskBase : MonoBehaviour {
         thisTaskObj = gameObject;
         thisTaskName = thisTaskObj.name;
 
-        foreach(GameObject player in playerList){
-            var playerTaskHandler = player.GetComponentInChildren<PlayerTaskHandler>();
-            playerTaskHandler.taskStartRsvps += TaskStartRsvp;
+        if (isAssignableTask){
+            foreach(GameObject player in playerList){
+                var playerTaskHandler = player.GetComponentInChildren<PlayerTaskHandler>();
+                playerTaskHandler.taskStartRsvps += TaskStartRsvp;
+            }
             GameProperties.allTasks.Add(thisTaskObj);
         }
+
     }
 
     private void TaskStartRsvp(GameObject taskObj, GameObject playerHandler){
