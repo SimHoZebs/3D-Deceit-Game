@@ -38,9 +38,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4695643711466962163}
     m_Modifications:
+    - target: {fileID: 1389828129, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
+      propertyPath: m_Radius
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7395103939583132854, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
       propertyPath: m_Name
       value: Player Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665625794601266809, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665625794601266815, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
+      propertyPath: field of view
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7665625794601266815, guid: 97c954ea26afdd4478cd679e961ffb47, type: 3}
       propertyPath: far clip plane
